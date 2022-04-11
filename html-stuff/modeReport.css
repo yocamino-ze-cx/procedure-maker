@@ -1,0 +1,11 @@
+span.editionButtons {
+    display: none;
+}
+
+span.executionButtons {
+    display: none;
+}
+
+span.timeStampDisplay {
+    display: block;
+}

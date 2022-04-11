@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+<html lang="en">
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Procedure-check-list</title>
+    <!-- referencing and authoring -->
+    <meta name="description" content="simple procedure checklist utility">
+    <meta name="copyright" content="MIT Licence" />
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="html-stuff/bootstrap-3.4.1-dist/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="html-stuff/bootstrap-3.4.1-dist/css/bootstrap.min.css.map" media="all" />
+    <!-- for icons map, see https://www.w3schools.com/bootstrap/bootstrap_ref_comp_glyphs.asp -->
+    <link rel="stylesheet" href="html-stuff/bootstrap-3.4.1-dist/fonts/glyphicons-halflings-regular.woff2" type="text/css" />
+    <link rel="stylesheet" href="html-stuff/bootstrap-3.4.1-dist/fonts/glyphicons-halflings-regular.woff" type="text/css" />
+    <link rel="stylesheet" href="html-stuff/bootstrap-3.4.1-dist/fonts/glyphicons-halflings-regular.ttf" type="text/css" />
+    <!-- CSS for page mode swithing -->
+    <link rel="stylesheet" href="html-stuff/modeReport.css" media="all" id="pageModeCSS" />
+    <!-- CK EDITOR -->
+    <script src="html-stuff/ck-editor-5/build/ckeditor.js"></script>
+    <script src="html-stuff/ck-editor-5/build/ckeditor.js.map"></script>
+    <!-- Javascript -->
+    <script src="html-stuff/scripts.js"></script>
+    <script src="html-stuff/uuid.js"></script>
+    <script src="html-stuff/htmlBasics.js"></script>
+    <script src="html-stuff/chapter.js"></script>
+    <script src="html-stuff/chapterList.js"></script>
+</head>
+<body>
+
+<hr/>
+<div id="sectionList">
+</div>
+
+<div id="modelSection" class="hidden">
+    <div name="sectionDivText">
+        <p>click, then write !</p>
+    </div>
+    <div name="actionDiv" class="text-center">
+        <span class="executionButtons pull-left">
+            <button class="btn btn-xs btn-info"     onclick="javascript:paintDiv(this, 'bg-info');"   >Info</button>
+            <button class="btn btn-xs btn-success"  onclick="javascript:paintDiv(this, 'bg-success');">Ok</button>
+            <button class="btn btn-xs btn-warning"  onclick="javascript:paintDiv(this, 'bg-warning');">Warning</button>
+            <button class="btn btn-xs btn-danger"   onclick="javascript:paintDiv(this, 'bg-danger');" >Error</button>
+            <button class="btn btn-xs"              onclick="javascript:paintDiv(this, '');"          >Original</button>
+        </span>
+        <span class="editionButtons pull-left">
+            <button class="btn btn-xs" onclick="javascript:upwards(this);"><i class="glyphicon glyphicon-arrow-up"></i> up <i class="glyphicon glyphicon-arrow-up"></i></button>
+            <button class="btn btn-xs" onclick="javascript:downwards(this);"><i class="glyphicon glyphicon-arrow-down"></i> down <i class="glyphicon glyphicon-arrow-down"></i></button>
+        </span>
+        <span class="editionButtons pull-right">
+            <button class="btn btn-xs" onclick="javascript:deleteSection(this);"><i class="glyphicon glyphicon-remove"></i></button>
+        </span>
+        <span class="timeStampDisplay pull-right bg-primary" name="spanTimestamp"></span>
+        <span class="editionButtons">
+            <button class="btn btn-xs btn-primary" onclick="javascript:addChapterAbove(this);"><i class="glyphicon glyphicon-share-alt"></i> Add above <i class="glyphicon glyphicon-share-alt"></i></button>
+            <button class="btn btn-xs btn-primary" onclick="javascript:addChapterBelow(this);"><i class="glyphicon glyphicon-download-alt"></i> Add below <i class="glyphicon glyphicon-download-alt"></i></button>
+        </span>
+    </div>
+    <hr/>
+</div>
+
+<footer>
+    <div class="text-center">
+        <p>
+            <span class="editionButtons pull-left">
+                <button class="btn btn-xs btn-primary" onclick="javascript:insertModelCopy();"><i class="glyphicon glyphicon-download-alt"></i> Add Instruction</button>
+            </span>
+            <span>
+                <label class="radio-inline"><input type="radio" name="modeRadioBtnGroup" value="Edition"   onchange="changeMode(this)"        >Edition</label>
+                <label class="radio-inline"><input type="radio" name="modeRadioBtnGroup" value="Execution" onchange="changeMode(this)"        >Execution</label>
+                <label class="radio-inline"><input type="radio" name="modeRadioBtnGroup" value="Report"    onchange="changeMode(this)" checked>Report</label>
+            </span>
+            <span class="pull-right">
+                <a href="#sectionList">Back to top <i class="glyphicon glyphicon-eject"></i></a>
+            </span>
+        </p>
+    </div>
+    <hr/>
+    <input id="fileNameField" type="file" onchange="loadFile(this);" accept="application/zip">
+    <button class="btn btn-xs" onclick="javascript:save();">SAVE</button>
+    <button class="btn btn-xs" onclick="javascript:load();">LOAD</button>
+    <hr/>
+    <p><a href="https://ckeditor.com/ckeditor-5/" target="_blank" rel="noopener">CKEditor 5</a>&nbsp;–&nbsp;Rich text editor of tomorrow, available today
+    </p>
+    <p>Copyright © 2022, <a href="https://github.com/yocamino-ze-cx/procedure-maker" target="_blank" rel="noopener">procedure-maker</a> is licensed under the terms of the GPL-3.0-or-later.
+    </p>
+    <hr/>
+</footer>
+
+</body>
+
+</html>
